@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import StudentItem from '../StudentItem/StudentItem.js';
+import {listStudents} from "../../repository/studentRepository";
+import StudentList from "../StudentList/StudentList.js";
+
 
 import './App.css';
 
@@ -8,37 +11,17 @@ class App extends Component {
     constructor(props){
         super(props);
 
+        this.state = {
+            student: listStudents()
+        }
 
     }
 
   render() {
 
-      let student1 = {
-          Ime: "Martin",
-          Prezime: "Kostadinov",
-          Nasoka: "KNI",
-          Indeks: "161159"
-      }
-
-      let student2 = {
-          Ime: "Darko",
-          Prezime: "Darkovski",
-          Nasoka: "KNI",
-          Indeks: "151234"
-      }
-
-      let student3 = {
-          Ime: "Marko",
-          Prezime: "Kostadinov",
-          Nasoka: "IKI",
-          Indeks: "512345"
-      }
-
     return (
         <div>
-        <StudentItem student={student1}/>
-        <StudentItem student={student2}/>
-            <StudentItem student={student3}/>
+        <StudentList items={this.state.student}/>
         </div>
     );
 
