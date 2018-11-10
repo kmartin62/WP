@@ -3,17 +3,15 @@ import StudentItem from "../StudentItem/StudentItem";
 
 export default class StudentList extends React.Component{
 
-    constructor(props){
-        super(props);
-    }
+
 
     render(){
 
-        const listItems = this.props.items.map((item, index) => {
+        const listItems = this.props.students.map((item, index) => {
             return (
-                <StudentItem key={index} item={item}/>
+                <StudentItem key={index} student={item}/>
             )
-        })
+        });
 
 
         return (

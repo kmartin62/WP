@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import StudentItem from '../StudentItem/StudentItem.js';
+import StudentManager from '../StudentManager/StudentManager.js';
 import {listStudents} from "../../repository/studentRepository";
 import StudentList from "../StudentList/StudentList.js";
 
@@ -17,11 +17,29 @@ class App extends Component {
 
     }
 
+    onAddNewStudent = (item, e) => {
+        this.setState( state => {
+            return {student:[...state.student, item]};
+        });
+    }
+
   render() {
 
     return (
-        <div>
-        <StudentList items={this.state.student}/>
+        <div className="App">
+        <div className="container">
+            <div className="row">
+                <div className="col-md-12">
+                    <StudentManager onNewStudent={this.onAddNewStudent}/>
+                </div>
+            </div>
+
+            <div className="row">
+                <div className="col-md-12">
+                    <StudentList students={this.state.student}/>
+                </div>
+            </div>
+        </div>
         </div>
     );
 
