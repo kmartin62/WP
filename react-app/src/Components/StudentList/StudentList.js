@@ -1,27 +1,29 @@
 import React from 'react'
 import StudentItem from "../StudentItem/StudentItem";
+import EditStudentDetails from '../EditStudentDetails/EditStudentDetails.js'
 
 export default class StudentList extends React.Component{
 
     render() {
 
-        const listStudents = this.props.students.map((item, index) => {
-            // console.log(item);
-            // console.log(index);
-
-            const test = () => {
-                console.log(item)
-            }
-
-            return (
-                <StudentItem key={index} student={item} onclick={test}/>
-            )
-        });
+        // var helpObject = {};
+        //
+        // const onClicker = (e) => {
+        //     console.log(e.target.name);
+        // }
 
         return (
             <div>
-                {listStudents}
+                <div>
+                {this.props.students.map((item, index) =>
+                <StudentItem key={index} student={item} onclick={onClicker}/>)}
+                </div>
+
+                <div>
+                    {/*<EditStudentDetails/>*/}
+                </div>
             </div>
+
         );
     }
 
