@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Children from '../Children/Children.js';
+import Sibiling from '../Sibiling/Sibiling.js';
 import StudentManager from '../StudentManager/StudentManager.js';
 import {listStudents} from "../../repository/studentRepository";
 import StudentList from "../StudentList/StudentList.js";
@@ -10,10 +12,11 @@ class App extends Component {
 
     constructor(props){
         super(props);
-
-        this.state = {
-            student: listStudents()
-        }
+        this.state = { name: "Martin" };
+        this.changeName = this.changeName.bind(this);
+        // this.state = {
+        //     student: listStudents()
+        //}
 
     }
 
@@ -23,25 +26,35 @@ class App extends Component {
         });
     }
 
+    changeName(newName){
+        this.setState({
+            name: newName
+        });
+    }
+
   render() {
 
     return (
-        <div className="App">
-        <div className="container">
-            <div className="row">
-                <div className="col-md-12">
-                    <StudentManager onNewStudent={this.onAddNewStudent}/>
-                </div>
-            </div>
-
-            <div className="row">
-                <div className="col-md-12">
-                    <StudentList students={this.state.student}/>
-                </div>
-            </div>
+        <div>
+        <Children name={this.state.name} onChange={this.changeName}/>
+        <Sibiling name={this.state.name}/>
         </div>
-        </div>
-    );
+        // {/*<div className="App">*/}
+        // {/*<div className="container">*/}
+        //     {/*<div className="row">*/}
+        //         {/*<div className="col-md-12">*/}
+        //             {/*<StudentManager onNewStudent={this.onAddNewStudent}/>*/}
+        //         {/*</div>*/}
+        //     {/*</div>*/}
+        //
+        //     {/*<div className="row">*/}
+        //         {/*<div className="col-md-12">*/}
+        //             {/*<StudentList students={this.state.student}/>*/}
+        //         {/*</div>*/}
+        //     {/*</div>*/}
+        // {/*</div>*/}
+        // {/*</div>*/}
+    )
 
 
 
