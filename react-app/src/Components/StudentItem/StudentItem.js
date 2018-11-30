@@ -1,11 +1,30 @@
 import React from 'react'
 
-const studentItem = (props) => {
-    return (<li>
-        <span>ime: {props.children} prezime: {props.prezime}</span>
-        <input onChange={props.changeEvent} value={props.children}/>
-        <button onClick={props.delEvent}>x</button>
-    </li>)
-}
+export default class StudentItem extends React.Component{
 
-export default studentItem;
+    constructor(props) {
+        super(props);
+        this.handleEvent = this.handleEvent.bind(this);
+    }
+
+
+    handleEvent = () => {
+        this.props.changeBoolean();
+    }
+
+    render() {
+
+        return (
+                <li onClick={this.handleEvent} key={"this.props.student.Indeks"} className="list-group-item">
+                    <div className="container">
+                    <div className="col-sm">
+                    {this.props.student.Ime}
+                    </div>
+                        <div className="col-sm">
+                    {this.props.student.Prezime}
+                        </div>
+                    </div>
+                </li>
+        );
+    }
+}
