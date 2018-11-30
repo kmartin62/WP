@@ -25,14 +25,14 @@ export const listStudents = () =>{
             Ime: "Marko",
             Prezime: "Kostadinov",
             Nasoka: "IKI",
-            Indeks: "512345"
+            Indeks: "5123455"
         },
 
         {
             Ime: "Marko",
             Prezime: "Kostadinov",
             Nasoka: "IKI",
-            Indeks: "512345"
+            Indeks: "5123452"
         }
     ]
 }

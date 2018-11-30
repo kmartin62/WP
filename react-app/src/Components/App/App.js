@@ -1,59 +1,62 @@
 import React, { Component } from 'react';
-import Children from '../Children/Children.js';
-import Sibiling from '../Sibiling/Sibiling.js';
-import StudentManager from '../StudentManager/StudentManager.js';
-import {listStudents} from "../../repository/studentRepository";
-import StudentList from "../StudentList/StudentList.js";
-
+import StudentItem from "../StudentItem/StudentItem.js"
 
 import './App.css';
+import {listStudents} from "../../repository/studentRepository";
 
 class App extends Component {
 
     constructor(props){
         super(props);
-        this.state = { name: "Martin" };
-        this.changeName = this.changeName.bind(this);
-        // this.state = {
-        //     student: listStudents()
-        //}
-
+        this.state = {
+            student: listStudents()
+        }
     }
 
-    onAddNewStudent = (item, e) => {
-        this.setState( state => {
-            return {student:[...state.student, item]};
+    deleteUser = (index, e) =>{
+        const users = Object.assign([], this.state.student); // napravi duplikat array
+        users.splice(index, 1);   // najdi go index i pomrdni ja celata niza za 1
+        this.setState({student:users}) // zameni ja starata niza so novata
+    }
+
+    changeUser = (indeks, e) => {
+        const index = this.state.student.findIndex((user) => {
+            return user.Indeks === indeks
         });
+
+        const user = Object.assign([], this.state.student[index]);
+
+        user.Ime = e.target.value;
+        console.log(user.Ime);
+
+        const users = Object.assign([], this.state.student)
+
+        users[index] = user;
+
+        this.setState({student:users})
+
+
     }
 
-    changeName(newName){
-        this.setState({
-            name: newName
-        });
-    }
 
   render() {
 
+
     return (
-        <div>
-        <Children name={this.state.name} onChange={this.changeName}/>
-        <Sibiling name={this.state.name}/>
-        </div>
-        // {/*<div className="App">*/}
-        // {/*<div className="container">*/}
-        //     {/*<div className="row">*/}
-        //         {/*<div className="col-md-12">*/}
-        //             {/*<StudentManager onNewStudent={this.onAddNewStudent}/>*/}
-        //         {/*</div>*/}
-        //     {/*</div>*/}
-        //
-        //     {/*<div className="row">*/}
-        //         {/*<div className="col-md-12">*/}
-        //             {/*<StudentList students={this.state.student}/>*/}
-        //         {/*</div>*/}
-        //     {/*</div>*/}
-        // {/*</div>*/}
-        // {/*</div>*/}
+       <div className="App">
+           <ul>
+               {
+                   this.state.student.map((student, index) => {
+                       return (<StudentItem
+                           prezime={student.Prezime}
+                           key={student.Indeks}
+                           delEvent={this.deleteUser.bind(this, index)}
+                           changeEvent={this.changeUser.bind(this, student.Indeks)}
+                       >{student.Ime}</StudentItem>)
+                   })
+               }
+           </ul>
+       </div>
     )
 
 
