@@ -1,6 +1,10 @@
 package com.martin.studentsapi.studentsapi.controllers;
 
 import com.martin.studentsapi.studentsapi.models.Student;
+import com.martin.studentsapi.studentsapi.models.exceptions.IndexException;
+import com.martin.studentsapi.studentsapi.models.exceptions.MissingParameterException;
+import com.martin.studentsapi.studentsapi.models.exceptions.StudentNotFoundException;
+import com.martin.studentsapi.studentsapi.models.exceptions.StudyProgramNotFoundException;
 import com.martin.studentsapi.studentsapi.services.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -45,21 +49,22 @@ public class StudentResource {
     }
 
     @PatchMapping("/{index}")
-    public void updateStudent(@PathVariable("index") String index, @RequestBody Student student){
-            studentService.updateStudent(index, student.getName(), student.getLastName());
+    public void updateStudent(@PathVariable("index") String index, @RequestBody Student student, String studyProgramName) throws StudentNotFoundException {
+            studentService.updateStudent(index, student.getName(), student.getLastName(), studyProgramName);
     }
 
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void addNew(@RequestBody Student student){
+    public void addNew(@RequestBody Student student, String studyProgramName) throws MissingParameterException, StudyProgramNotFoundException, IndexException {
         studentService.addNew(student.getIndex(),
                 student.getName(),
-                student.getLastName());
+                student.getLastName(),
+                studyProgramName);
     }
 
     @DeleteMapping("/{index}")
-    public void deleteStudent(@PathVariable("index") String index){
+    public void deleteStudent(@PathVariable("index") String index) throws StudentNotFoundException {
         studentService.deleteStudent(index);
     }
 }

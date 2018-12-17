@@ -15,7 +15,7 @@ public class StudyProgram {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String name;
+    private String Name;
 
     public Long getId() {
         return id;
@@ -26,10 +26,10 @@ public class StudyProgram {
     }
 
     public String getName() {
-        return name;
+        return Name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.Name = name;
     }
 }
