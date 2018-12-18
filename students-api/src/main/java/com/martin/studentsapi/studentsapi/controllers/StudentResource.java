@@ -1,6 +1,7 @@
 package com.martin.studentsapi.studentsapi.controllers;
 
 import com.martin.studentsapi.studentsapi.models.Student;
+import com.martin.studentsapi.studentsapi.models.dto.StudentDto;
 import com.martin.studentsapi.studentsapi.models.exceptions.IndexException;
 import com.martin.studentsapi.studentsapi.models.exceptions.MissingParameterException;
 import com.martin.studentsapi.studentsapi.models.exceptions.StudentNotFoundException;
@@ -49,18 +50,21 @@ public class StudentResource {
     }
 
     @PatchMapping("/{index}")
-    public void updateStudent(@PathVariable("index") String index, @RequestBody Student student, String studyProgramName) throws StudentNotFoundException {
-            studentService.updateStudent(index, student.getName(), student.getLastName(), studyProgramName);
+    public void updateStudent(@PathVariable("index") String index, @RequestBody StudentDto student) throws StudentNotFoundException {
+            studentService.updateStudent(index,
+                    student.getName(),
+                    student.getLastName(),
+                    student.getStudyProgram());
     }
 
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void addNew(@RequestBody Student student, String studyProgramName) throws MissingParameterException, StudyProgramNotFoundException, IndexException {
+    public void addNew(@RequestBody StudentDto student) throws MissingParameterException, StudyProgramNotFoundException, IndexException {
         studentService.addNew(student.getIndex(),
                 student.getName(),
                 student.getLastName(),
-                studyProgramName);
+                student.getStudyProgram());
     }
 
     @DeleteMapping("/{index}")

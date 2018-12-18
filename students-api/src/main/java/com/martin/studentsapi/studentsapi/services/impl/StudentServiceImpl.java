@@ -91,7 +91,10 @@ public class StudentServiceImpl implements StudentService {
                 .filter(s -> s.getIndex().equals(index))
                 .findFirst();
 
-        return student.get();
+        if(student.isPresent())
+            return student.get();
+
+        return null;
     }
 
     @Override
