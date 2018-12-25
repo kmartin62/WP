@@ -12,6 +12,7 @@ import java.util.List;
 /**
  * Created by @kmartin62
  */
+@CrossOrigin({"*"})
 @RestController
 @RequestMapping(value = "/study_programs", produces = MediaType.APPLICATION_JSON_VALUE)
 public class StudyProgramResource {

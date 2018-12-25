@@ -15,13 +15,13 @@ export default class StudentItem extends React.Component{
     render() {
 
         return (
-                <li onClick={this.handleEvent} key={"this.props.student.Indeks"} className="list-group-item">
+                <li onClick={this.handleEvent} key={"this.props.student.index"} className="list-group-item">
                     <div className="container">
                     <div className="col-sm">
-                    {this.props.student.Ime}
+                    {this.props.student.name}
                     </div>
                         <div className="col-sm">
-                    {this.props.student.Prezime}
+                    {this.props.student.lastName}
                         </div>
                     </div>
                 </li>

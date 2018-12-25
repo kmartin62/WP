@@ -1,16 +1,22 @@
 package com.martin.studentsapi.studentsapi.models.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * Created by @kmartin62
  */
 public class StudentDto {
 
+    @JsonProperty("index")
     private String index;
 
+    @JsonProperty("name")
     private String name;
 
+    @JsonProperty("lastName")
     private String lastName;
 
+    @JsonProperty("studyProgram")
     private String studyProgram;
 
     public String getIndex() {

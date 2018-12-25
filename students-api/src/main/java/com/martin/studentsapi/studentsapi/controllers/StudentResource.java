@@ -17,6 +17,8 @@ import java.util.List;
 /**
  * Created by @kmartin62
  */
+
+@CrossOrigin({"*"})
 @RestController
 @RequestMapping(value = "/students", produces = MediaType.APPLICATION_JSON_VALUE)
 public class StudentResource {

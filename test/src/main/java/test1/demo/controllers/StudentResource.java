@@ -5,10 +5,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import test1.demo.model.Student;
+import test1.demo.model.exceptions.EmptyParameteresException;
+import test1.demo.model.exceptions.IndexNotSixException;
+import test1.demo.model.exceptions.StudentNotFoundException;
+import test1.demo.model.exceptions.StudyProgramNotFound;
 import test1.demo.service.StudentService;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 /**
@@ -47,9 +52,14 @@ public class StudentResource {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void addNew(@RequestBody Student student, HttpServletResponse response){
-        Student student1 = studentService.addNew(student);
+    public void addNew(@RequestBody Map<String, String> t, HttpServletResponse response) throws StudyProgramNotFound, IndexNotSixException, EmptyParameteresException {
+        Student student1 = studentService.addNew(t.get("index"), t.get("name"), t.get("lastName"), t.get("studyProgramName"));
         response.setHeader("Location", "/students/" + student1.getIndex());
+    }
+
+    @PatchMapping
+    public void updateStudent(String index, String name, String lastName, String studyProgramName) throws StudyProgramNotFound, StudentNotFoundException {
+        studentService.update(index, name, lastName, studyProgramName);
     }
 
 //    @DeleteMapping("/{index}")
